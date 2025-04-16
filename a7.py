@@ -1,3 +1,4 @@
+# Camden
 import math
 import os
 import pickle
@@ -50,7 +51,7 @@ class BayesClassifier:
         # get the list of file names from the training data directory
         walk_result = next(os.walk(self.training_data_directory), (None, None, []))
         _, __, files = walk_result
-        
+
         if not files:
             raise RuntimeError(f"Couldn't find path {self.training_data_directory}")
 
@@ -105,6 +106,8 @@ class BayesClassifier:
             prob_neg = (count_neg + 1) / (neg_total + V)
             neg_prob += math.log(prob_neg)
 
+        print('pos_prob', pos_prob)
+        print('neg_prob', neg_prob)
         if pos_prob > neg_prob:
             return "positive"
         elif neg_prob > pos_prob:
@@ -248,3 +251,6 @@ if __name__ == "__main__":
     print("\nThe following should all be negative.")
     print(b.classify('rainy days are the worst'))
     print(b.classify('computer science is terrible'))
+
+    print("\nThe following is to test out the method with each groups responses")
+    print(b.classify("The show starts strong the first few seasons aside from the terrible music and the ridiculous amount of times the writers felt the need to put the phrase G*d Damn in their script. If you close your eyes and listen to the sound bites the writers filled the script with spiritual curses. Negative words and phrases intended to take root in the subconscious minds of their audience. By Season 6 the show becomes unwatchable. It turns into some modern Shawshank redemption story. I didn't even start season 7 because of how bad season 6 was. Skipping forward to season 8 to find out if things got better. It feels like a whole new cast, weak story lines, and poor acting. I skipped through the season then lost interest in skipping."))
